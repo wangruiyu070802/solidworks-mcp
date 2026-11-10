@@ -1,0 +1,36 @@
+# runtime artifacts
+out/
+*.log
+server_debug.log
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# local research / reference material (not part of the package)
+_registry/
+_ref_just1step/
+probe_sw*.py
+gen_stl.py
+test_bambu_cli.ps1
+bambu_v2.ps1
+strcheck.py
+test_mcp_client.py
+cli_*.out
+cli_*.err
+info.txt
+info.err
+case_*.3mf
+b*.3mf
+v*.3mf
+child_test.3mf
+
+# os
+Thumbs.db
+Desktop.ini

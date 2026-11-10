@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "solidworks-mcp"
+version = "0.1.0"
+description = "MCP server that drives SOLIDWORKS via COM for parameter-driven FDM-ready modeling, and hands models to Bambu Studio."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "devlep-practice" }]
+keywords = ["solidworks", "mcp", "cad", "3d-printing", "bambu-studio", "fdm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Computer Aided Design (CAD)",
+]
+dependencies = [
+    "mcp>=2.3,<3",
+    "pywin32>=306; platform_system == 'Windows'",
+]
+
+[project.urls]
+Homepage = "https://github.com/wangruiyu070802/solidworks-mcp"
+Documentation = "https://github.com/wangruiyu070802/solidworks-mcp#readme"
+
+[project.scripts]
+solidworks-mcp = "solidworks_mcp.__main__:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

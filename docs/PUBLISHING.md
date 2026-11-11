@@ -17,8 +17,8 @@ gh repo create wangruiyu070802/solidworks-mcp --public --source . --push
 
 ## 第 2 步：（可选）发布到 PyPI，简化启动命令
 
-当前卡片命令为 `uvx --from https://github.com/wangruiyu070802/solidworks-mcp solidworks-mcp`，
-GitHub 直装、可核验，无需 PyPI。发布 PyPI 后可把命令简化为 `uvx solidworks-mcp`：
+当前卡片命令为 `uvx --from https://github.com/wangruiyu070802/solidworks-mcp@v0.2.0 solidworks-mcp`，
+固定 tag 直装、可核验，无需 PyPI。发布 PyPI 后可把命令简化为 `uvx solidworks-mcp`：
 
 ```powershell
 pip install build twine
@@ -66,7 +66,8 @@ twine upload dist/*
    - 无 Token/Key/密码/本机路径；stdio `command: uvx` 指向已发布 PyPI 包
    - Prompt 只做本地建模与状态检查，无付费/破坏性副作用
    - 图标用 emoji 📐，无远程图片跨域问题
-6. 维护者复核后会补 `candidates/records/solidworks-cad.json`（人工批准 + 真实运行验收报告，我方不提交）。
+6. 我方已提交 `candidates/drafts/solidworks-cad-2026-11-10/` 候选草案（`review.decision=pending`）与验收记录；
+   维护者来源审核 + 独立运行时验收 + 人工批准后，将候选迁入 `candidates/records/solidworks-cad.json`。
 7. 合并后：CI 重建目录 → jsDelivr 缓存清理 → 用户在 MCP连接器市场点「刷新」即可看到卡片。
 
 ## 上架后维护
@@ -77,7 +78,8 @@ twine upload dist/*
 
 ## 本机已完成的验证证据（供维护者参考）
 
-- 集成自测：`solidworks-mcp --selftest` 7/7 PASS（建模、双孔、STL 网格 324 三角面、60×40×5mm 包围盒、SLDPRT、护栏、状态持久化）
-- 单测：`python -m unittest discover -s tests -v` 9/9 OK（纯函数，CI 可跑）
-- DSH 端到端：`sw_plate → sw_hole → sw_check_printability → sw_export_stl → sw_open_in_bambu` 全部实测通过
-- 环境：SOLIDWORKS 2024 SP0.1 (revision 32.0.1)、Bambu Studio 02.09.01.70、Python 3.13
+- 单测：`python -m unittest discover -s tests -v` 27/27 OK（纯函数，CI 可跑；含覆盖拒绝/越界路径/写失败保留/所有权匹配/输入校验）
+- 集成自测（修复前贡献者证据）：`solidworks-mcp --selftest` 7/7 PASS（建模、双孔、STL 网格 324 三角面、60×40×5mm 包围盒、SLDPRT、护栏、状态持久化）
+- 集成自测（修复后新增）：外来文档不被关闭、已存在文件默认拒绝覆盖——需真实 SOLIDWORKS，本轮未重跑，待维护者独立验收
+- DSH 端到端（修复前贡献者证据）：`sw_plate → sw_hole → sw_check_printability → sw_export_stl → sw_open_in_bambu` 实测通过
+- 环境：SOLIDWORKS 2024 SP0.1 (revision 32.0.1)、Bambu Studio 02.09.01.70、Python 3.13、Windows
